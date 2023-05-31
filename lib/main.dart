@@ -1,4 +1,6 @@
-import 'package:crud_firebase/services/firebase_service.dart';
+//import 'package:crud_firebase/services/firebase_service.dart';
+import 'package:crud_firebase/pages/home_page.dart';
+import 'package:crud_firebase/pages/add_name_page.dart';
 import 'package:flutter/material.dart';
 
 // Import the generated file
@@ -20,47 +22,14 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Welcome to Flutter',
-      home: Home(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const Home(),
+        '/add': (context) => const AddNamePage(),
+      },
     );
   }
 }
 
-class Home extends StatefulWidget {
-  const Home({
-    Key? key,
-}) : super(key: key);
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-
-
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Welcome to Flutter'),
-      ),
-      body: FutureBuilder(
-          future: getPeople(),
-          builder: ((context, snapshot){
-            if (snapshot.hasData){
-              return ListView.builder(
-                itemCount: snapshot.data?.length,
-                itemBuilder: (context, index) {
-                  return Text(snapshot.data?[index]['name']);
-                },
-              );
-            }else{
-              return const Center(
-                //child: CircularProgressIndicator(),
-                child: Text("Cargando....."),
-              );
-            }
-          })),
-    );
-  }
-}
