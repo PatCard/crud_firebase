@@ -14,6 +14,10 @@ Future<List> getPeople() async {
   return people;
 }
 
+//Guardar name en db
+Future<void> addPeople(String name) async {
+  await db.collection("people").add({"name": name});
+}
 
 
 

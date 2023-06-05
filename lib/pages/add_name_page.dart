@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:crud_firebase/services/firebase_service.dart';
 class AddNamePage extends StatefulWidget {
   const AddNamePage({Key? key}) : super(key: key);
 
@@ -8,6 +8,8 @@ class AddNamePage extends StatefulWidget {
 }
 
 class _AddNamePageState extends State<AddNamePage> {
+  TextEditingController nameController = TextEditingController(text:"");
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,15 +17,18 @@ class _AddNamePageState extends State<AddNamePage> {
         title: const Text('Add Name'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(50.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column (
           children: [
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: nameController,
+              decoration: const InputDecoration(
                 hintText: 'Ingrese el nuevo nombre',
               ),
             ),
-            ElevatedButton(onPressed: (){}, child: const Text("Guardar"))
+            ElevatedButton(onPressed: () async {
+              await addPeople(nameController.text);
+            }, child: const Text("Guardar"))
           ],
         ),
       ),
