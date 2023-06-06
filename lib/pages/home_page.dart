@@ -37,8 +37,10 @@ class _HomeState extends State<Home> {
             }
           })),
           floatingActionButton: FloatingActionButton(
-            onPressed: (){
-              Navigator.pushNamed(context, '/add');
+            onPressed: () async {
+              await Navigator.pushNamed(context, '/add');
+              setState(() {});
+              //print("Sigo ejecutando el home");
             },
             child: const Icon(Icons.add),
           ),
